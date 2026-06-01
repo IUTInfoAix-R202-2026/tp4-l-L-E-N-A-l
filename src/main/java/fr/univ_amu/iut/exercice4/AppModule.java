@@ -2,6 +2,7 @@ package fr.univ_amu.iut.exercice4;
 
 import com.google.inject.AbstractModule;
 import fr.univ_amu.iut.exercice3.ServiceAuth;
+import fr.univ_amu.iut.exercice3.ServiceAuthSimple;
 
 /**
  * Module Guice de l'exercice 4.
@@ -19,10 +20,7 @@ public class AppModule extends AbstractModule {
 
   @Override
   protected void configure() {
-    // TODO exercice 4 : lier l'interface ServiceAuth à son implémentation.
-    //
-    // Objectif : quand une classe demande un ServiceAuth (via @Inject), Guice
-    // doit fournir une instance de ServiceAuthSimple.
-    // Astuce : bind(ServiceAuth.class).to(ServiceAuthSimple.class);
+
+    bind(ServiceAuth.class).to(ServiceAuthSimple.class);
   }
 }
