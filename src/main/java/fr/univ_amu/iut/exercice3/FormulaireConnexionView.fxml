@@ -7,21 +7,21 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="fr.univ_amu.iut.exercice3.FormulaireConnexionController"
-      spacing="12"
-      style="-fx-padding: 24; -fx-min-width: 360;">
+       xmlns:fx="http://javafx.com/fxml"
+       fx:controller="fr.univ_amu.iut.exercice3.FormulaireConnexionController"
+       spacing="12"
+       style="-fx-padding: 24; -fx-min-width: 360;">
 
-  <Label text="VigieChiro PR Companion - Connexion"
-         style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+       <Label text="VigieChiro PR Companion - Connexion"
+              style="-fx-font-size: 16px; -fx-font-weight: bold;" />
 
-  <Label text="Identifiant" />
-  <TextField fx:id="champIdentifiant" promptText="ex : marie" />
+       <Label text="Identifiant" />
+       <TextField fx:id="champIdentifiant" promptText="ex : marie" />
 
-  <Label text="Mot de passe" />
-  <PasswordField fx:id="champMotDePasse" promptText="********" />
+       <Label text="Mot de passe" />
+       <PasswordField fx:id="champMotDePasse" promptText="********" />
 
-  <Button fx:id="boutonValider" text="Se connecter" onAction="#surValider" />
+       <Button fx:id="boutonValider" text="Se connecter" onAction="#surValider" />
 
-  <Label fx:id="labelStatut" style="-fx-text-fill: #1a5276;" />
+       <Label fx:id="labelStatut" style="-fx-text-fill: #1a5276;" />
 </VBox>
