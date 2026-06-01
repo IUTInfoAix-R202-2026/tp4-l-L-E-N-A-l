@@ -1,7 +1,6 @@
 package fr.univ_amu.iut.exercice5;
 
 import com.google.inject.Inject;
-import javafx.beans.binding.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
