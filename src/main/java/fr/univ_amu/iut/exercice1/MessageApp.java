@@ -28,7 +28,7 @@ public class MessageApp extends Application {
     MessageViewModel viewModel = new MessageViewModel(modele);
 
     // 3. Couche Vue : on charge le FXML et on fournit le contrôleur déjà
-    //    relié au ViewModel via le controllerFactory.
+    // relié au ViewModel via le controllerFactory.
     FXMLLoader loader = new FXMLLoader(getClass().getResource("MessageView.fxml"));
     loader.setControllerFactory(type -> new MessageController(viewModel));
     Parent racine = loader.load();
