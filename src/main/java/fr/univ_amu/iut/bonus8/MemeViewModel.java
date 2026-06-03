@@ -1,5 +1,7 @@
 package fr.univ_amu.iut.bonus8;
 
+import java.util.Locale;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -21,9 +23,11 @@ public class MemeViewModel {
   private final StringProperty texteBasAffiche = new SimpleStringProperty();
 
   public MemeViewModel() {
-    // TODO bonus 8 : lier les versions affichées (MAJUSCULES) aux textes saisis.
-    // Astuce : Bindings.createStringBinding(() -> texteHaut.get().toUpperCase(Locale.FRENCH),
-    //          texteHaut).
+
+    texteHautAffiche.bind(
+        Bindings.createStringBinding(() -> texteHaut.get().toUpperCase(Locale.FRENCH), texteHaut));
+    texteBasAffiche.bind(
+        Bindings.createStringBinding(() -> texteBas.get().toUpperCase(Locale.FRENCH), texteBas));
   }
 
   public StringProperty texteHautProperty() {

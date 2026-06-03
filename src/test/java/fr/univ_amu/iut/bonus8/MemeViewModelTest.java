@@ -2,7 +2,6 @@ package fr.univ_amu.iut.bonus8;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -11,7 +10,7 @@ import org.junit.jupiter.api.Test;
  */
 class MemeViewModelTest {
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   void le_texte_du_haut_est_affiche_en_majuscules() {
     MemeViewModel vm = new MemeViewModel();
@@ -22,7 +21,7 @@ class MemeViewModelTest {
         .isEqualTo("QUAND LE PR DETECTE UNE PIPISTRELLE");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   void le_texte_du_bas_est_affiche_en_majuscules() {
     MemeViewModel vm = new MemeViewModel();
@@ -32,7 +31,7 @@ class MemeViewModelTest {
     assertThat(vm.texteBasAfficheProperty().get()).isEqualTo("A 3H DU MATIN");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   void les_textes_affiches_suivent_les_saisies_en_temps_reel() {
     MemeViewModel vm = new MemeViewModel();
