@@ -1,5 +1,6 @@
 package fr.univ_amu.iut.bonus9;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -19,9 +20,8 @@ public class NoteTerrainViewModel {
   private final StringProperty nombreCaracteres = new SimpleStringProperty();
 
   public NoteTerrainViewModel() {
-    // TODO bonus 9 : lier `nombreCaracteres` à la longueur de la note,
-    // au format "N caractères".
-    // Astuce : Bindings.concat(note.length(), " caractères").
+
+    nombreCaracteres.bind(Bindings.concat(note.length(), " caractères"));
   }
 
   public StringProperty noteProperty() {
