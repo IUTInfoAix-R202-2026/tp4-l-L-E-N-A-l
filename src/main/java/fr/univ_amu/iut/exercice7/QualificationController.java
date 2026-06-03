@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import fr.nedjar.vigiechiro.audio.AudioView;
 import java.nio.file.Path;
 import java.time.format.DateTimeFormatter;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -39,9 +40,7 @@ public class QualificationController {
 
   @FXML
   private void initialize() {
-    // Composant audio de la SAE 2.01 (fourni) : une séquence par défaut au démarrage,
-    // puis on recharge le fichier à chaque sélection dans le tableau (le composant
-    // recalcule alors sonogramme et spectrogramme).
+
     chargerAudio("seq-1.wav");
     viewModel
         .sequenceSelectionneeProperty()
@@ -52,19 +51,36 @@ public class QualificationController {
               }
             });
 
-    // TODO exercice 7 : câbler entièrement la vue sur le ViewModel.
-    //
-    // 1. Colonnes (cell value factory) : horodatage (HH:mm), fréquence (%.1f kHz),
-    //    durée (en s), statut.
-    // 2. tableSequences.setItems(viewModel.sequencesProperty());
-    // 3. Relayer la sélection : viewModel.sequenceSelectionneeProperty()
-    //       .bind(tableSequences.getSelectionModel().selectedItemProperty());
-    // 4. labelSelection <- descriptionSelectionProperty (sens unique).
-    // 5. boutonEcouter désactivé quand rien n'est sélectionné :
-    //       boutonEcouter.disableProperty().bind(viewModel.peutEcouterProperty().not());
-    // 6. zoneCommentaire <-> commentaireProperty (bidirectionnel).
-    // 7. choiceVerdict : items = viewModel.listeVerdicts(), valeur <-> verdictSaisiProperty.
-    // 8. labelVerdictGlobal <- verdictGlobalLibelleProperty.
+    colDuree.setCellValueFactory(
+        c -> new SimpleStringProperty(c.getValue().getDureeSecondes() + "s"));
+
+    colFrequence.setCellValueFactory(
+        c ->
+            new SimpleStringProperty(
+                String.format("%.1f", c.getValue().getFrequenceDominanteKHz())));
+
+    colHorodatage.setCellValueFactory(
+        c -> new SimpleStringProperty(c.getValue().getHorodatage().format(HEURE)));
+
+    colStatut.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getStatut()));
+
+    tableSequences.setItems(viewModel.sequencesProperty());
+
+    viewModel
+        .sequenceSelectionneeProperty()
+        .bind(tableSequences.getSelectionModel().selectedItemProperty());
+
+    labelSelection.textProperty().bind(viewModel.descriptionSelectionProperty());
+
+    boutonEcouter.disableProperty().bind(viewModel.peutEcouterProperty().not());
+
+    zoneCommentaire.textProperty().bindBidirectional(viewModel.commentaireProperty());
+
+    choiceVerdict.getItems().addAll(viewModel.listeVerdicts());
+
+    choiceVerdict.valueProperty().bindBidirectional(viewModel.verdictSaisiProperty());
+
+    labelVerdictGlobal.textProperty().bind(viewModel.verdictGlobalLibelleProperty());
   }
 
   @FXML
@@ -88,7 +104,8 @@ public class QualificationController {
     try {
       audioView.setAudioFile(Path.of(getClass().getResource("/audio/" + ressource).toURI()));
     } catch (Exception e) {
-      // Ressource absente : on laisse le composant vide (cas non bloquant pour le TP).
+      // Ressource absente : on laisse le composant vide (cas non bloquant pour le
+      // TP).
     }
   }
 }
